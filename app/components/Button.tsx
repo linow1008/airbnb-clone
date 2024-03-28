@@ -35,3 +35,4 @@ const Button = ({ label, onClick, disabled, icon: Icon, outline, small }: Props)
 };
 
 export default Button;
+

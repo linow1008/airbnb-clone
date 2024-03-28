@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -56,6 +56,11 @@ const LoginModal = (props: Props) => {
         });
     };
 
+    const toggle = useCallback(() => {
+        loginModal.onClose();
+        registerModal.onOpen();
+    }, [loginModal, registerModal]);
+
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <Heading title="Welcome back" subtitle="Login to your account!" />
@@ -71,9 +76,9 @@ const LoginModal = (props: Props) => {
             <Button outline label="Continue with Github" icon={AiFillGithub} onClick={() => signIn("github")} />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center gap-2 justify-center">
-                    <div>Already have account?</div>
-                    <div onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer hover:underline">
-                        Log In
+                    <div>First time using Airbnb?</div>
+                    <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">
+                        Create an account
                     </div>
                 </div>
             </div>
